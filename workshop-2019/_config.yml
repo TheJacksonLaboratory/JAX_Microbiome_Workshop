@@ -17,12 +17,17 @@
 title: Introduction to Microbial Community Analysis
 email: jethro.johnson@jax.org
 description: >- # this means to ignore newlines until "baseurl:"
-  Jackson Laboratory For Genomic Medicine 15th-17th November 2017
+  The Jackson Laboratory For Genomic Medicine, Oct 29th to 31st, 2019
 
-baseurl: "/microbiome-workshop-2018" # the subpath of your site, e.g. /blog
+baseurl: "/workshop-2019/microbiome-workshop-2019" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username:
 github_username:
+
+# List of links in the navigation bar
+#navbar-links:
+#  Home: "https://thejacksonlaboratory.github.io/microbiome-workshop-2018/"
+#  Etherpad: "https://pad.carpentries.org/jax-microbiome-2018"
 
 # Build settings
 markdown: kramdown
@@ -33,8 +38,8 @@ plugins:
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
-#   - Gemfile
+ #exclude:
+ #  - amplicon_sequence_variants.md
 #   - Gemfile.lock
 #   - node_modules
 #   - vendor/bundle/
