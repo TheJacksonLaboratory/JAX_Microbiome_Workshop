@@ -3,5 +3,5 @@ layout: external
 title: "Etherpad - collaborative document"
 date:   2020-10-28 04:00:00
 categories: jekyll update
-external_url: https://pad.carpentries.org/jax-microbiome-2019
+external_url: https://etherpad.wikimedia.org/p/jax-microbiome-2020
 ---
