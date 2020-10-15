@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Analysing mWGS data"
-date:   2019-10-31 10:00:00
+date:   2020-10-29 10:00:00
 categories: jekyll update
 ---
 
