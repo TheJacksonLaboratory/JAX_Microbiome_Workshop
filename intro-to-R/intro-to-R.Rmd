@@ -2011,7 +2011,7 @@ for(i in 1:5){
 output_vector
 ```
 
-# DataFrame Operators
+# Data Frame Operators
 
 ## Adding columns and rows in data frames
 ### cbind
