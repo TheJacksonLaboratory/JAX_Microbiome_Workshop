@@ -271,6 +271,7 @@ div.tocify {
 </div>
 
 
+<p>© Software Carpentry Foundation. This material adapted from Software Carpentry's &quot;Introduction to R for non-programmers using gapminder data&quot; lesson: Thomas Wright and Naupaka Zimmerman (eds): &quot;Software Carpentry: R for Reproducible Scientific Analysis.&quot; Version 2016.06, June 2016, <a href="https://github.com/swcarpentry/r-novice-gapminder" class="uri">https://github.com/swcarpentry/r-novice-gapminder</a>, 10.5281/zenodo.57520.</p>
 <div id="basic-r" class="section level1">
 <h1><span class="header-section-number">1</span> Basic R</h1>
 <div id="before-starting-the-workshop" class="section level2">
@@ -522,7 +523,7 @@ min-length
 ##     }
 ##     else all.names
 ## }
-## &lt;bytecode: 0x7fcbc5377e90&gt;
+## &lt;bytecode: 0x7ffad656a290&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
 <pre class="r"><code>rm(x)</code></pre>
@@ -704,7 +705,12 @@ c(1, 2, 'f')</code></pre>
 </blockquote>
 <blockquote>
 <h3 id="challenge-3-1"><span class="header-section-number">2.6</span> Challenge 3</h3>
-<p>Use help to find a function (and its associated parameters) that you could use to load data from a csv file in which columns are delimited with &quot;&quot; (tab) and the decimal point is a &quot;.&quot; (period). This check for decimal separator is important, especially if you are working with international colleagues, because different countries have different conventions for the decimal point (i.e. comma vs period). hint: use <code>??csv</code> to lookup csv related functions. &gt; #### Solution to Challenge 3 &gt; &gt; The standard R function for reading tab-delimited files with a period &gt; decimal separator is read.delim(). You can also do this with &gt; <code>read.table(file, sep=&quot;\t&quot;)</code> (the period is the <em>default</em> decimal &gt; separator for <code>read.table()</code>, although you may have to change &gt; the <code>comment.char</code> argument as well if your data file contains &gt; hash (#) characters</p>
+<p>Use help to find a function (and its associated parameters) that you could use to load data from a csv file in which columns are delimited with &quot;&quot; (tab) and the decimal point is a &quot;.&quot; (period). This check for decimal separator is important, especially if you are working with international colleagues, because different countries have different conventions for the decimal point (i.e. comma vs period).</p>
+<p>hint: use <code>??csv</code> to lookup csv related functions.</p>
+<blockquote>
+<h4 id="solution-to-challenge-3-1"><span class="header-section-number">2.6</span> Solution to Challenge 3</h4>
+<p>The standard R function for reading tab-delimited files with a period decimal separator is read.delim(). You can also do this with <code>read.table(file, sep=&quot;\t&quot;)</code> (the period is the <em>default</em> decimal separator for <code>read.table()</code>, although you may have to change the <code>comment.char</code> argument as well if your data file contains hash (#) characters</p>
+</blockquote>
 </blockquote>
 </div>
 <div id="other-ports-of-call" class="section level2">
@@ -1263,7 +1269,7 @@ another_list</code></pre>
 <p>Try out these examples and explain what is returned by each one.</p>
 <p><em>Hint:</em> Use the function <code>typeof()</code> to examine what is returned in each case.</p>
 <blockquote>
-<h4 id="solution-to-challenge-3-1"><span class="header-section-number">3.4</span> Solution to Challenge 3</h4>
+<h4 id="solution-to-challenge-3-2"><span class="header-section-number">3.4</span> Solution to Challenge 3</h4>
 <pre class="r fold-hide"><code>raw_profiles[1]</code></pre>
 <pre><code>##   taxonomy
 ## 1 Otu00001
@@ -1349,17 +1355,6 @@ xlist[1]</code></pre>
 <pre><code>## [1] 2</code></pre>
 </blockquote>
 </blockquote>
-<blockquote>
-<h3 id="challenge-6-1"><span class="header-section-number">3.4.1</span> Challenge 6</h3>
-<p>Given a linear model:</p>
-<pre class="r"><code>mod &lt;- aov(pop ~ lifeExp, data=gapminder)</code></pre>
-<p>Extract the residual degrees of freedom (hint: <code>attributes()</code> will help you)</p>
-<blockquote>
-<h4 id="solution-to-challenge-6"><span class="header-section-number">3.4.1</span> Solution to challenge 6</h4>
-<pre class="r fold-hide"><code>attributes(mod) ## `df.residual` is one of the names of `mod`</code></pre>
-<pre class="r fold-hide"><code>mod$df.residual</code></pre>
-</blockquote>
-</blockquote>
 </div>
 </div>
 <div id="matrices" class="section level2">
@@ -1407,7 +1402,7 @@ x &lt;- matrix(1:50, ncol=5, nrow=10, byrow = TRUE) # to fill by row</code></pre
 </blockquote>
 </blockquote>
 <blockquote>
-<h3 id="challenge-6-2"><span class="header-section-number">3.5</span> Challenge 6</h3>
+<h3 id="challenge-6-1"><span class="header-section-number">3.5</span> Challenge 6</h3>
 <p>Create a list of length two containing a character vector for each of the sections in this part of the workshop:</p>
 <ul>
 <li>Data types</li>
@@ -1415,7 +1410,7 @@ x &lt;- matrix(1:50, ncol=5, nrow=10, byrow = TRUE) # to fill by row</code></pre
 </ul>
 <p>Populate each character vector with the names of the data types and data structures we've seen so far.</p>
 <blockquote>
-<h4 id="solution-to-challenge-6-1"><span class="header-section-number">3.5</span> Solution to Challenge 6</h4>
+<h4 id="solution-to-challenge-6"><span class="header-section-number">3.5</span> Solution to Challenge 6</h4>
 <pre class="r fold-hide"><code>dataTypes &lt;- c('double', 'complex', 'integer', 'character', 'logical')
 dataStructures &lt;- c('data.frame', 'vector', 'factor', 'list', 'matrix')
 answer &lt;- list(dataTypes, dataStructures)</code></pre>
@@ -1826,7 +1821,10 @@ ggplot(data = merged_table, aes(y = Sample3, x = taxonomy, by=Genus, color=Famil
 <div id="copyright" class="section level1">
 <h1><span class="header-section-number">9</span> Copyright</h1>
 <blockquote>
-<p>Copyright: Materials used in these lessons were derived from work that is Copyright © Data Carpentry &gt;(<a href="http://datacarpentry.org/" class="uri">http://datacarpentry.org/</a>). All Data Carpentry instructional material is made available under the Creative &gt;Commons Attribution license (CC BY 4.0). Thomas Wright and Naupaka Zimmerman (eds): &quot;Software Carpentry: R &gt;forReproducible Scientific Analysis.&quot; Version 2016.06, June &gt;2016,<a href="https://github.com/swcarpentry/r-novice-gapminder,10.5281/zenodo.57520" class="uri">https://github.com/swcarpentry/r-novice-gapminder,10.5281/zenodo.57520</a>.</p>
+<p>Copyright: Materials used in these lessons were derived from work that is Copyright © Data Carpentry &gt;(<a href="http://datacarpentry.org/" class="uri">http://datacarpentry.org/</a>). All Data Carpentry instructional material is made available under the Creative &gt;Commons Attribution license (CC BY 4.0).</p>
+</blockquote>
+<blockquote>
+<p>Thomas Wright and Naupaka Zimmerman (eds): &quot;Software Carpentry: R &gt;forReproducible Scientific Analysis.&quot; Version 2016.06, June &gt;2016,<a href="https://github.com/swcarpentry/r-novice-gapminder,10.5281/zenodo.57520" class="uri">https://github.com/swcarpentry/r-novice-gapminder,10.5281/zenodo.57520</a>.</p>
 </blockquote>
 </div>
 
