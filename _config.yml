@@ -35,6 +35,7 @@ theme: minima
 plugins:
   - jekyll-feed
 
+exclude: ["intro-to-R/intro-to-R.Rmd", "intro-to-R.Rmd", "README.md"]
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
