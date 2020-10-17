@@ -40,6 +40,8 @@ plugins:
 # to override the default setting.
 #exclude:
   - intro-to-R/intro-to-R.Rmd
+  - intro-to-R/
+  - intro-to-R.Rmd
 #   - Gemfile.lock
 #   - node_modules
 #   - vendor/bundle/
