@@ -38,8 +38,8 @@ plugins:
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
- #exclude:
- #  - amplicon_sequence_variants.md
+#exclude:
+  - intro-to-R/intro-to-R.md
 #   - Gemfile.lock
 #   - node_modules
 #   - vendor/bundle/
