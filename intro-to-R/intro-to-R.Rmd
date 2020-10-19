@@ -1140,16 +1140,14 @@ objects besides `data.frame`.
 >
 > * What is the class of the object `taxonomic_profiles`?
 > * How many rows and how many columns are in this object?
-> * How many species have been recorded during these taxonomic_profiles?
 >
 > ```{r, answer=TRUE, results="markup", purl=FALSE}
 >
 > str(taxonomic_profiles)
 >
 > ## * class: data frame
-> ## * how many rows: 34786,  how many columns: 13
-> ## * how many species: 48
->
+> ## * how many rows: 7,  how many columns: 4
+
 > ```
 
 
