@@ -523,7 +523,7 @@ min-length
 ##     }
 ##     else all.names
 ## }
-## &lt;bytecode: 0x7fc28ae98870&gt;
+## &lt;bytecode: 0x7fdec2823070&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
 <pre class="r"><code>rm(x)</code></pre>
@@ -1510,8 +1510,72 @@ print(m)</code></pre>
 </div>
 </div>
 </div>
+<div id="data-frame-operators" class="section level1">
+<h1><span class="header-section-number">4</span> Data Frame Operators</h1>
+<div id="adding-columns-and-rows-in-data-frames" class="section level2">
+<h2><span class="header-section-number">4.1</span> Adding columns and rows in data frames</h2>
+<div id="cbind" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> cbind</h3>
+<p>We already learned that the columns of a data frame are vectors, so that our data are consistent in type throughout the columns. As such, if we want to add a new column, we can start by making a new vector:</p>
+<pre class="r"><code>vd3 &lt;- c(61, 40, 32)
+vd3</code></pre>
+<pre><code>## [1] 61 40 32</code></pre>
+<pre class="r"><code>cbind(raw_profiles, vd3)</code></pre>
+<pre><code>##   taxonomy vd1 vd2 vd3
+## 1 Otu00001 2.1   1  61
+## 2 Otu00002 5.0   0  40
+## 3 Otu00003 3.2   1  32</code></pre>
+</div>
+<div id="rbind" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> rbind</h3>
+<p>Now how about adding rows? We already know that the rows of a data frame are lists:</p>
+<pre class="r"><code>newRow &lt;- list(&quot;Otu00004&quot;, 3.3, 3, 90)
+raw_profiles_new &lt;- rbind(raw_profiles, newRow)</code></pre>
+<pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, ri, value = &quot;Otu00004&quot;): invalid factor level,
+## NA generated</code></pre>
+<pre class="r"><code>raw_profiles_new</code></pre>
+<pre><code>##   taxonomy vd1 vd2
+## 1 Otu00001 2.1   1
+## 2 Otu00002 5.0   0
+## 3 Otu00003 3.2   1
+## 4     &lt;NA&gt; 3.3   3</code></pre>
+</div>
+<div id="merge" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> merge</h3>
+<pre class="r"><code># merge two data frames by taxonomy
+taxonomic_mapping &lt;- read.csv(file = &quot;data/taxonomic_mapping.csv&quot;)
+taxonomic_mapping</code></pre>
+<pre><code>##   taxonomy  Kingdom         Phylum                 Class             Order
+## 1 Otu00001 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
+## 2 Otu00002 Bacteria Proteobacteria Epsilonproteobacteria Campylobacterales
+## 3 Otu00003 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
+## 4 Otu00004 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
+## 5 Otu00005 Bacteria Proteobacteria Epsilonproteobacteria Campylobacterales
+## 6 Otu00006 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
+## 7 Otu00007 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
+##              Family          Genus Species
+## 1    Prevotellaceae Prevotellaceae      NA
+## 2 Helicobacteraceae   Helicobacter      NA
+## 3    Prevotellaceae Alloprevotella      NA
+## 4    Bacteroidaceae    Bacteroides      NA
+## 5 Helicobacteraceae   Helicobacter      NA
+## 6     Bacteroidales  Bacteroidales      NA
+## 7    Prevotellaceae Prevotellaceae      NA</code></pre>
+<pre class="r"><code>taxonomic_profiles</code></pre>
+<pre><code>##   taxonomy Sample1 Sample2 Sample3
+## 1 Otu00001      21      31      22
+## 2 Otu00002      50      40     100
+## 3 Otu00003      32      10      10
+## 4 Otu00004      20      20      55
+## 5 Otu00005      10      46      65
+## 6 Otu00006      66      89      93
+## 7 Otu00007     100      23      56</code></pre>
+<pre class="r"><code>merged_table &lt;- merge(taxonomic_profiles,taxonomic_mapping,by=&quot;taxonomy&quot;)</code></pre>
+</div>
+</div>
+</div>
 <div id="control-flow" class="section level1">
-<h1><span class="header-section-number">4</span> Control Flow</h1>
+<h1><span class="header-section-number">5</span> Control Flow</h1>
 <p>Often when we're coding we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.</p>
 <p>There are several ways you can control flow in R. For conditional statements, the most commonly used approaches are the constructs:</p>
 <pre class="r"><code># if
@@ -1571,11 +1635,11 @@ x</code></pre>
 ## and only the first element will be used</code></pre>
 <p>If your condition evaluates to a vector with more than one logical element, the function <code>if()</code> will still run, but will only evaluate the condition in the first element. Here you need to make sure your condition is of length 1.</p>
 <blockquote>
-<h2 id="tip-any-and-all"><span class="header-section-number">4</span> Tip: <code>any()</code> and <code>all()</code></h2>
+<h2 id="tip-any-and-all"><span class="header-section-number">5</span> Tip: <code>any()</code> and <code>all()</code></h2>
 <p>The <code>any()</code> function will return TRUE if at least one TRUE value is found within a vector, otherwise it will return <code>FALSE</code>. This can be used in a similar way to the <code>%in%</code> operator. The function <code>all()</code>, as the name suggests, will only return <code>TRUE</code> if all values in the vector are <code>TRUE</code>.</p>
 </blockquote>
 <div id="repeating-operations" class="section level2">
-<h2><span class="header-section-number">4.1</span> Repeating operations</h2>
+<h2><span class="header-section-number">5.1</span> Repeating operations</h2>
 <p>If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a <code>for()</code> loop will do the job. We saw <code>for()</code> loops in the shell lessons earlier. This is the most flexible of looping operations, but therefore also the hardest to use correctly. Avoid using <code>for()</code> loops unless the order of iteration is important: i.e. the calculation at each iteration depends on the results of previous iterations.</p>
 <p>The basic structure of a <code>for()</code> loop is:</p>
 <pre class="r"><code>for(iterator in set of values){
@@ -1639,70 +1703,6 @@ output_vector</code></pre>
 <pre><code>##  [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot;
 ## [13] &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot;
 ## [25] &quot;5 e&quot;</code></pre>
-</div>
-</div>
-<div id="data-frame-operators" class="section level1">
-<h1><span class="header-section-number">5</span> Data Frame Operators</h1>
-<div id="adding-columns-and-rows-in-data-frames" class="section level2">
-<h2><span class="header-section-number">5.1</span> Adding columns and rows in data frames</h2>
-<div id="cbind" class="section level3">
-<h3><span class="header-section-number">5.1.1</span> cbind</h3>
-<p>We already learned that the columns of a data frame are vectors, so that our data are consistent in type throughout the columns. As such, if we want to add a new column, we can start by making a new vector:</p>
-<pre class="r"><code>vd3 &lt;- c(61, 40, 32)
-vd3</code></pre>
-<pre><code>## [1] 61 40 32</code></pre>
-<pre class="r"><code>cbind(raw_profiles, vd3)</code></pre>
-<pre><code>##   taxonomy vd1 vd2 vd3
-## 1 Otu00001 2.1   1  61
-## 2 Otu00002 5.0   0  40
-## 3 Otu00003 3.2   1  32</code></pre>
-</div>
-<div id="rbind" class="section level3">
-<h3><span class="header-section-number">5.1.2</span> rbind</h3>
-<p>Now how about adding rows? We already know that the rows of a data frame are lists:</p>
-<pre class="r"><code>newRow &lt;- list(&quot;Otu00004&quot;, 3.3, 3, 90)
-raw_profiles_new &lt;- rbind(raw_profiles, newRow)</code></pre>
-<pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, ri, value = &quot;Otu00004&quot;): invalid factor level,
-## NA generated</code></pre>
-<pre class="r"><code>raw_profiles_new</code></pre>
-<pre><code>##   taxonomy vd1 vd2
-## 1 Otu00001 2.1   1
-## 2 Otu00002 5.0   0
-## 3 Otu00003 3.2   1
-## 4     &lt;NA&gt; 3.3   3</code></pre>
-</div>
-<div id="merge" class="section level3">
-<h3><span class="header-section-number">5.1.3</span> merge</h3>
-<pre class="r"><code># merge two data frames by taxonomy
-taxonomic_mapping &lt;- read.csv(file = &quot;data/taxonomic_mapping.csv&quot;)
-taxonomic_mapping</code></pre>
-<pre><code>##   taxonomy  Kingdom         Phylum                 Class             Order
-## 1 Otu00001 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
-## 2 Otu00002 Bacteria Proteobacteria Epsilonproteobacteria Campylobacterales
-## 3 Otu00003 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
-## 4 Otu00004 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
-## 5 Otu00005 Bacteria Proteobacteria Epsilonproteobacteria Campylobacterales
-## 6 Otu00006 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
-## 7 Otu00007 Bacteria  Bacteroidetes           Bacteroidia     Bacteroidales
-##              Family          Genus Species
-## 1    Prevotellaceae Prevotellaceae      NA
-## 2 Helicobacteraceae   Helicobacter      NA
-## 3    Prevotellaceae Alloprevotella      NA
-## 4    Bacteroidaceae    Bacteroides      NA
-## 5 Helicobacteraceae   Helicobacter      NA
-## 6     Bacteroidales  Bacteroidales      NA
-## 7    Prevotellaceae Prevotellaceae      NA</code></pre>
-<pre class="r"><code>taxonomic_profiles</code></pre>
-<pre><code>##   taxonomy Sample1 Sample2 Sample3
-## 1 Otu00001      21      31      22
-## 2 Otu00002      50      40     100
-## 3 Otu00003      32      10      10
-## 4 Otu00004      20      20      55
-## 5 Otu00005      10      46      65
-## 6 Otu00006      66      89      93
-## 7 Otu00007     100      23      56</code></pre>
-<pre class="r"><code>merged_table &lt;- merge(taxonomic_profiles,taxonomic_mapping,by=&quot;taxonomy&quot;)</code></pre>
-</div>
 </div>
 </div>
 <div id="the-dplyr-package" class="section level1">

@@ -1853,6 +1853,39 @@ instead of their row and column indices.
 > >
 > > D
 
+# Data Frame Operators
+
+## Adding columns and rows in data frames
+### cbind
+We already learned that the columns of a data frame are vectors, so that our data are consistent in type throughout the columns. As such, if we want to add a new column, we can start by making a new vector:
+```{r}
+vd3 <- c(61, 40, 32)
+vd3
+```
+
+```{r}
+cbind(raw_profiles, vd3)
+```
+
+### rbind
+Now how about adding rows? We already know that the rows of a data frame are lists:
+
+```{r}
+newRow <- list("Otu00004", 3.3, 3, 90)
+raw_profiles_new <- rbind(raw_profiles, newRow)
+raw_profiles_new
+```
+
+
+### merge
+```{r}
+# merge two data frames by taxonomy
+taxonomic_mapping <- read.csv(file = "data/taxonomic_mapping.csv")
+taxonomic_mapping
+taxonomic_profiles
+merged_table <- merge(taxonomic_profiles,taxonomic_mapping,by="taxonomy")
+```
+
 
 # Control Flow
 
@@ -2009,38 +2042,6 @@ for(i in 1:5){
 output_vector
 ```
 
-# Data Frame Operators
-
-## Adding columns and rows in data frames
-### cbind
-We already learned that the columns of a data frame are vectors, so that our data are consistent in type throughout the columns. As such, if we want to add a new column, we can start by making a new vector:
-```{r}
-vd3 <- c(61, 40, 32)
-vd3
-```
-
-```{r}
-cbind(raw_profiles, vd3)
-```
-
-### rbind
-Now how about adding rows? We already know that the rows of a data frame are lists:
-
-```{r}
-newRow <- list("Otu00004", 3.3, 3, 90)
-raw_profiles_new <- rbind(raw_profiles, newRow)
-raw_profiles_new
-```
-
-
-### merge
-```{r}
-# merge two data frames by taxonomy
-taxonomic_mapping <- read.csv(file = "data/taxonomic_mapping.csv")
-taxonomic_mapping
-taxonomic_profiles
-merged_table <- merge(taxonomic_profiles,taxonomic_mapping,by="taxonomy")
-```
 
 # The dplyr package
 Luckily, the dplyr package provides a number of very useful functions for manipulating dataframes in a way that will reduce the above repetition, reduce the probability of making errors, and probably even save you some typing. As an added bonus, you might even find the dplyr grammar easier to read.
