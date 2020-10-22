@@ -1887,6 +1887,73 @@ merged_table <- merge(taxonomic_profiles,taxonomic_mapping,by="taxonomy")
 ```
 
 
+
+# The dplyr package
+Luckily, the dplyr package provides a number of very useful functions for manipulating dataframes in a way that will reduce the above repetition, reduce the probability of making errors, and probably even save you some typing. As an added bonus, you might even find the dplyr grammar easier to read.
+
+Here we’re going to cover 6 of the most commonly used functions as well as using pipes (%>%) to combine them.
+
+select() filter() group_by() summarize() mutate()
+
+If you have have not installed this package earlier, please do so:
+```{r eval=FALSE}
+install.packages('dplyr')
+```
+
+Now let’s load the package
+```{r}
+library("dplyr")
+```
+
+
+## Using select()
+If, for example, we wanted to move forward with only a few of the variables in our dataframe we could use the select() function. This will keep only the variables you select.
+```{r}
+table_kingdom_phylum <- select(merged_table,taxonomy,Sample1,Kingdom, Phylum)
+```
+
+## using pipes
+```{r}
+table_select <- merged_table %>% 
+                          select(taxonomy,Sample1,Kingdom, Phylum)
+```
+
+## Using filter()
+we can combine select and filter
+```{r}
+table_select <- merged_table %>% 
+                          filter(Kingdom=='Bacteria')
+table_select
+```
+
+## Using Select and filter
+```{r}
+table_select_filter <- merged_table %>% 
+                          filter(Kingdom=='Bacteria') %>%
+                          select(taxonomy, Sample1)
+```
+
+## Using summarize()
+The above was a bit on the uneventful side but group_by() is much more exciting in conjunction with summarize(). This will allow us to create new variable(s) by using functions that repeat for each of the Phylum-specific data frames. That is to say, using the group_by() function, we split our original dataframe into multiple pieces, then we can run functions (e.g. mean() or sd()) within summarize().
+```{r}
+otu_groupby_phylum <- merged_table %>%
+    group_by(Phylum) %>%
+    summarize(mean_sample1=mean(Sample1))
+otu_groupby_phylum
+```
+
+# The ggplot package
+
+Install ggplot
+```{r eval=FALSE}
+install.packages("ggplot2")
+```
+Plot a simple figure
+```{r}
+library(ggplot2)
+ggplot(data = merged_table, aes(y = Sample3, x = taxonomy, by=Genus, color=Family)) + geom_point()
+```
+
 # Control Flow
 
 Often when we're coding we want to control the flow of our actions. This can be done
@@ -2043,74 +2110,13 @@ output_vector
 ```
 
 
-# The dplyr package
-Luckily, the dplyr package provides a number of very useful functions for manipulating dataframes in a way that will reduce the above repetition, reduce the probability of making errors, and probably even save you some typing. As an added bonus, you might even find the dplyr grammar easier to read.
-
-Here we’re going to cover 6 of the most commonly used functions as well as using pipes (%>%) to combine them.
-
-select() filter() group_by() summarize() mutate()
-
-If you have have not installed this package earlier, please do so:
-```{r eval=FALSE}
-install.packages('dplyr')
-```
-
-Now let’s load the package
-```{r}
-library("dplyr")
-```
-
-
-## Using select()
-If, for example, we wanted to move forward with only a few of the variables in our dataframe we could use the select() function. This will keep only the variables you select.
-```{r}
-table_kingdom_phylum <- select(merged_table,taxonomy,Sample1,Kingdom, Phylum)
-```
-
-## using pipes
-```{r}
-table_select <- merged_table %>% 
-                          select(taxonomy,Sample1,Kingdom, Phylum)
-```
-
-## Using filter()
-we can combine select and filter
-```{r}
-table_select <- merged_table %>% 
-                          filter(Kingdom=='Bacteria')
-table_select
-```
-
-## Using Select and filter
-```{r}
-table_select_filter <- merged_table %>% 
-                          filter(Kingdom=='Bacteria') %>%
-                          select(taxonomy, Sample1)
-```
-
-## Using summarize()
-The above was a bit on the uneventful side but group_by() is much more exciting in conjunction with summarize(). This will allow us to create new variable(s) by using functions that repeat for each of the continent-specific data frames. That is to say, using the group_by() function, we split our original dataframe into multiple pieces, then we can run functions (e.g. mean() or sd()) within summarize().
-```{r}
-otu_groupby_phylum <- merged_table %>%
-    group_by(Phylum) %>%
-    summarize(mean_sample1=mean(Sample1))
-otu_groupby_phylum
-```
-
-# The ggplot package
-
-Install ggplot
-```{r eval=FALSE}
-install.packages("ggplot2")
-```
-Plot a simple figure
-```{r}
-library(ggplot2)
-ggplot(data = merged_table, aes(y = Sample3, x = taxonomy, by=Genus, color=Family)) + geom_point()
-```
-
-
 # Resources for Learning R
+ - How to download and install R and RStudio:
+ 
+    **Download RStudio**: https://rstudio.com/products/rstudio/download/
+    
+    **Install R and RStudio**: https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu
+    
  - Cheatsheets: https://rstudio.com/resources/cheatsheets/
  - swirl: http://swirlstats.com/
  - Quick-R: https://www.statmethods.net/
